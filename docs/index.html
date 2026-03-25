@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | QApilot — AI-Native Mobile App Testing</title>
+  <meta name="description" content="Insights, guides, and deep-dives on mobile app testing, QA automation, Appium, and building high-quality mobile products." />
+  <meta property="og:title" content="QApilot Blog — Mobile Testing Insights" />
+  <meta property="og:description" content="Insights, guides, and deep-dives on mobile app testing, QA automation, Appium, and building high-quality mobile products." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://qapilot.io/lovable-uploads/7513a5a6-39e6-4ba3-9460-2a7acb675540.png" />
+  <link rel="icon" href="https://qapilot.io/lovable-uploads/favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --indigo: #6366f1;
+      --indigo-dark: #4f46e5;
+      --indigo-light: #e0e7ff;
+      --navy: #0f172a;
+      --slate: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--navy);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+    .logo img { height: 28px; width: 28px; }
+    .logo-dot { color: var(--indigo); }
+    nav { display: flex; align-items: center; gap: 24px; }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    nav a:hover { color: var(--navy); }
+    .nav-cta {
+      background: var(--indigo);
+      color: var(--white) !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.875rem !important;
+      transition: background 0.15s !important;
+    }
+    .nav-cta:hover { background: var(--indigo-dark) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+      color: var(--white);
+      padding: 80px 24px 72px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99, 102, 241, 0.2);
+      border: 1px solid rgba(99, 102, 241, 0.4);
+      color: #a5b4fc;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 18px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero h1 span { color: #a5b4fc; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ── SECTION HEADERS ── */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--indigo);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      margin-bottom: 32px;
+    }
+
+    /* ── FEATURED POST ── */
+    .featured-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 64px;
+      align-items: center;
+    }
+    .featured-img {
+      border-radius: 14px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: var(--indigo-light);
+    }
+    .featured-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .featured-content {}
+    .post-category {
+      display: inline-block;
+      background: var(--indigo-light);
+      color: var(--indigo-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .featured-content h2 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+      margin-bottom: 14px;
+    }
+    .featured-content p {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+      margin-bottom: 20px;
+    }
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-bottom: 22px;
+    }
+    .post-meta span { display: flex; align-items: center; gap: 5px; }
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--indigo);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+    .read-more:hover { gap: 10px; }
+    .read-more svg { width: 16px; height: 16px; }
+
+    /* ── POST GRID ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 56px;
+    }
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .post-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .post-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(15, 23, 42, 0.1);
+    }
+    .card-img {
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--indigo-light), #ddd6fe);
+      overflow: hidden;
+    }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-body { padding: 20px; }
+    .card-body .post-category { margin-bottom: 10px; }
+    .card-body h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .card-body p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+    .card-date { font-weight: 500; }
+    .card-read { color: var(--indigo); font-weight: 600; }
+
+    /* ── EMPTY STATE ── */
+    .empty-card {
+      background: var(--white);
+      border: 2px dashed var(--border);
+      border-radius: 14px;
+      padding: 36px 24px;
+      text-align: center;
+      color: var(--muted);
+    }
+    .empty-card p { font-size: 0.875rem; line-height: 1.6; }
+
+    /* ── NEWSLETTER ── */
+    .newsletter {
+      background: linear-gradient(135deg, #0f172a, #1e1b4b);
+      border-radius: 20px;
+      padding: 56px 48px;
+      text-align: center;
+      margin-top: 72px;
+      color: var(--white);
+    }
+    .newsletter h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .newsletter p { color: #94a3b8; margin-bottom: 32px; font-size: 1rem; line-height: 1.7; }
+    .newsletter-form { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .newsletter-form input {
+      padding: 12px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-size: 0.95rem;
+      width: 280px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .newsletter-form input::placeholder { color: #94a3b8; }
+    .newsletter-form input:focus { border-color: var(--indigo); }
+    .newsletter-form button {
+      background: var(--indigo);
+      color: var(--white);
+      border: none;
+      padding: 12px 28px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s;
+    }
+    .newsletter-form button:hover { background: var(--indigo-dark); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      background: var(--white);
+      margin-top: 80px;
+      padding: 40px 24px;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-left { display: flex; align-items: center; gap: 10px; }
+    .footer-left .logo { font-size: 1rem; }
+    .footer-copy { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--muted); font-size: 0.85rem; text-decoration: none; }
+    .footer-links a:hover { color: var(--navy); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .featured-img { max-height: 240px; }
+      .post-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .post-grid { grid-template-columns: 1fr; }
+      .newsletter { padding: 40px 24px; }
+      nav { gap: 12px; }
+      nav a:not(.nav-cta) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="https://qapilot.io" class="logo">
+        <img src="https://qapilot.io/lovable-uploads/favicon.png" alt="QApilot" />
+        QApilot<span class="logo-dot"> Blog</span>
+      </a>
+      <nav>
+        <a href="https://qapilot.io">Home</a>
+        <a href="https://qapilot.io/#features">Features</a>
+        <a href="https://qapilot.io/blogs/">Blogs</a>
+        <a href="https://qapilot.io/#contact" class="nav-cta">Get Started →</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+      QApilot Blog
+    </div>
+    <h1>Mobile QA Insights for<br/><span>Modern Engineering Teams</span></h1>
+    <p>Deep dives, practical guides, and expert takes on mobile app testing, Appium automation, AI-driven QA, and releasing with confidence.</p>
+  </section>
+
+  <main class="main">
+
+    <!-- FEATURED POST -->
+    <div class="section-label">Featured</div>
+    <div class="section-title">Latest from the blog</div>
+
+    <div class="featured-grid">
+      <div class="featured-img">
+        <img src="posts/2026-03-25-reduce-flaky-appium-tests/hero.png"
+             alt="How to Reduce Flaky Appium Tests"
+             onerror="this.style.display='none'" />
+      </div>
+      <div class="featured-content">
+        <span class="post-category">Test Automation</span>
+        <h2>How to Reduce Flaky Appium Tests: A Practical Guide for Mobile QA Teams</h2>
+        <div class="post-meta">
+          <span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Mar 25, 2026
+          </span>
+          <span>
+            <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            8 min read
+          </span>
+        </div>
+        <p>Flaky tests waste engineer hours and erode release confidence. Discover the 7 root causes behind Appium test instability — brittle locators, timing gaps, shared state — and proven fixes to eliminate flakiness for good.</p>
+        <a href="posts/2026-03-25-reduce-flaky-appium-tests/" class="read-more">
+          Read article
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ALL POSTS GRID -->
+    <div class="section-label">All Posts</div>
+    <div class="section-title">Everything we've published</div>
+
+    <div class="post-grid">
+
+      <!-- Post 1 -->
+      <a href="posts/2026-03-25-reduce-flaky-appium-tests/" class="post-card">
+        <div class="card-img">
+          <img src="posts/2026-03-25-reduce-flaky-appium-tests/hero.png"
+               alt="Reduce Flaky Appium Tests"
+               onerror="this.style.background='linear-gradient(135deg,#e0e7ff,#ddd6fe)'" />
+        </div>
+        <div class="card-body">
+          <span class="post-category">Test Automation</span>
+          <h3>How to Reduce Flaky Appium Tests: A Practical Guide</h3>
+          <p>Flaky tests aren't random. Learn the 7 root causes and how to fix them permanently in your mobile QA pipeline.</p>
+          <div class="card-meta">
+            <span class="card-date">Mar 25, 2026 · 8 min</span>
+            <span class="card-read">Read →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Placeholder 2 -->
+      <div class="empty-card" style="display:flex;align-items:center;justify-content:center;min-height:280px;">
+        <div>
+          <div style="font-size:2rem;margin-bottom:12px;">✍️</div>
+          <p><strong style="color:#1e293b;">More articles coming soon</strong><br/>We publish weekly guides on mobile testing, AI-driven QA, and engineering best practices.</p>
+        </div>
+      </div>
+
+      <!-- Placeholder 3 -->
+      <div class="empty-card" style="display:flex;align-items:center;justify-content:center;min-height:280px;">
+        <div>
+          <div style="font-size:2rem;margin-bottom:12px;">📬</div>
+          <p><strong style="color:#1e293b;">Subscribe for updates</strong><br/>Get new posts delivered to your inbox. No spam — just practical QA insights.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NEWSLETTER -->
+    <div class="newsletter">
+      <h2>Stay ahead in mobile QA</h2>
+      <p>Get practical insights on Appium automation, AI testing, and shipping with confidence — delivered weekly.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input type="email" placeholder="Enter your work email" />
+        <button type="submit">Subscribe →</button>
+      </form>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <a href="https://qapilot.io" class="logo footer-left">
+          <img src="https://qapilot.io/lovable-uploads/favicon.png" alt="QApilot" />
+          QApilot Blog
+        </a>
+        <p class="footer-copy">© 2026 Digitral Private Limited. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://qapilot.io">Website</a>
+        <a href="https://qapilot.io/#features">Features</a>
+        <a href="mailto:support@qapilot.com">Contact</a>
+        <a href="https://www.linkedin.com/company/qapilot">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
